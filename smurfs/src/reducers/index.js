@@ -5,12 +5,17 @@ import {
   GET_SMURFS_START,
   GET_SMURFS_SUCCESS,
   GET_SMURFS_FAILURE,
+  UPDATE_SMURF_START,
+  DELETE_SMURF_START,
+  DELETE_SMURF_SUCCESS,
+  DELETE_SMURF_FAILURE,
 } from '../actions';
 
 const initialState = {
   smurfs: [],
   error: '',
   isLoading: false,
+  isEditing: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,6 +56,25 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         smurfs: [],
+        isLoading: false,
+        error: action.payload,
+      };
+    case DELETE_SMURF_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: '',
+      };
+    case DELETE_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        isLoading: false,
+        error: '',
+      };
+    case DELETE_SMURF_FAILURE:
+      return {
+        ...state,
         isLoading: false,
         error: action.payload,
       };
