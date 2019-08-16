@@ -1,9 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addSmurf, getSmurfs, deleteSmurf } from '../actions';
+import {
+  addSmurf,
+  getSmurfs,
+  deleteSmurf,
+  setSmurfToEdit,
+  updateSmurf,
+} from '../actions';
 import './App.css';
 
 import FormikSmurfForm from './SmurfForm';
+import EditSmurfForm from './EditSmurfForm';
 
 const App = props => {
   useEffect(() => {
@@ -16,9 +23,16 @@ const App = props => {
     <div className="App">
       <h1>SMURFS! 2.0 W/ Redux</h1>
       {props.isEditing ? (
-        <FormikSmurfForm updateSmurf={props.updateSmurf} />
+        <EditSmurfForm
+          isEditing={props.isEditing}
+          smurfToEdit={props.smurfToEdit}
+          updateSmurf={props.updateSmurf}
+        />
       ) : (
-        <FormikSmurfForm addSmurf={props.addSmurf} />
+        <FormikSmurfForm
+          addSmurf={props.addSmurf}
+          isEditing={props.isEditing}
+        />
       )}
       {props.smurfs.map(smurf => {
         return (
@@ -27,7 +41,9 @@ const App = props => {
             <p>Age: {smurf.age}</p>
             <p>Height: {smurf.height}</p>
             <div>
-              <button>Update</button>
+              <button onClick={() => props.setSmurfToEdit(smurf)}>
+                Update
+              </button>
               <button onClick={() => props.deleteSmurf(smurf.id)}>
                 Remove
               </button>
@@ -45,10 +61,11 @@ const mapStateToProps = state => {
     error: state.error,
     isLoading: state.isLoading,
     isEditing: state.isEditing,
+    smurfToEdit: state.smurfToEdit,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addSmurf, getSmurfs, deleteSmurf },
+  { addSmurf, getSmurfs, deleteSmurf, setSmurfToEdit, updateSmurf },
 )(App);

@@ -9,6 +9,8 @@ export const ADD_SMURF_START = 'ADD_SMURF_START';
 export const ADD_SMURF_SUCCESS = 'ADD_SMURF_SUCCESS';
 export const ADD_SMURF_FAILURE = 'ADD_SMURF_FAILURE';
 
+export const SET_SMURF_TO_EDIT = 'SET_SMURF_TO_EDIT';
+
 export const UPDATE_SMURF_START = 'UPDATE_SMURF_START';
 export const UPDATE_SMURF_SUCCESS = 'UPDATE_SMURF_SUCCESS';
 export const UPDATE_SMURF_FAILURE = 'UPDATE_SMURF_FAILURE';
@@ -35,6 +37,13 @@ export const addSmurf = smurf => dispatch => {
     .post('http://localhost:3333/smurfs', smurf)
     .then(res => dispatch({ type: ADD_SMURF_SUCCESS }))
     .catch(err => dispatch({ type: ADD_SMURF_FAILURE, payload: err.response }));
+};
+
+export const setSmurfToEdit = smurf => {
+  return {
+    type: SET_SMURF_TO_EDIT,
+    payload: smurf,
+  };
 };
 
 export const updateSmurf = (id, update) => dispatch => {

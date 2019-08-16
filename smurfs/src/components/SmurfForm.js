@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
-const SmurfForm = ({ touched, errors, status, addSmurf }) => {
+const SmurfForm = ({ touched, errors, status, addSmurf, isEditing }) => {
   useEffect(() => {
     if (status) {
       addSmurf(status);
@@ -11,7 +11,7 @@ const SmurfForm = ({ touched, errors, status, addSmurf }) => {
 
   return (
     <div className="smurf-form-container">
-      <h2>Smurf Form</h2>
+      <h2>Add Smurf Form</h2>
       <Form className="smurf-form">
         <label className="smurf-form-label">
           Name:
@@ -36,7 +36,7 @@ const SmurfForm = ({ touched, errors, status, addSmurf }) => {
             <p className="error">{errors.height}</p>
           )}
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">Add Smurf</button>
       </Form>
     </div>
   );

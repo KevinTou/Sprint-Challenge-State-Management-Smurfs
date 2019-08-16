@@ -8,6 +8,7 @@ import {
   UPDATE_SMURF_START,
   UPDATE_SMURF_SUCCESS,
   UPDATE_SMURF_FAILURE,
+  SET_SMURF_TO_EDIT,
   DELETE_SMURF_START,
   DELETE_SMURF_SUCCESS,
   DELETE_SMURF_FAILURE,
@@ -18,6 +19,7 @@ const initialState = {
   error: '',
   isLoading: false,
   isEditing: false,
+  smurfToEdit: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -79,6 +81,36 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case SET_SMURF_TO_EDIT:
+      return {
+        ...state,
+        isEditing: true,
+        smurfToEdit: action.payload,
+      };
+    case UPDATE_SMURF_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: '',
+        isEditing: true,
+      };
+    case UPDATE_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: [],
+        isLoading: false,
+        error: '',
+        isEditing: false,
+        smurfToEdit: null,
+      };
+    case UPDATE_SMURF_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+        isEditing: false,
+        smurfToEdit: null,
       };
     default:
       return state;
