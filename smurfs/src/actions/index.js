@@ -53,7 +53,7 @@ export const deleteSmurf = id => dispatch => {
   loadProgressBar();
   axios
     .delete(`http://localhost:3333/smurfs/${id}`)
-    .then(res => dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data }))
+    .then(res => dispatch({ type: DELETE_SMURF_SUCCESS }))
     .catch(err =>
       dispatch({ type: DELETE_SMURF_FAILURE, payload: err.response }),
     );

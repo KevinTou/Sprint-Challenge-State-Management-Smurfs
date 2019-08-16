@@ -6,6 +6,8 @@ import {
   GET_SMURFS_SUCCESS,
   GET_SMURFS_FAILURE,
   UPDATE_SMURF_START,
+  UPDATE_SMURF_SUCCESS,
+  UPDATE_SMURF_FAILURE,
   DELETE_SMURF_START,
   DELETE_SMURF_SUCCESS,
   DELETE_SMURF_FAILURE,
@@ -68,7 +70,7 @@ const reducer = (state = initialState, action) => {
     case DELETE_SMURF_SUCCESS:
       return {
         ...state,
-        smurfs: action.payload,
+        smurfs: [],
         isLoading: false,
         error: '',
       };
